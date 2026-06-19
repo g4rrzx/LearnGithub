@@ -197,6 +197,9 @@ const App = (() => {
     } else {
       renderArticle(area, mod);
     }
+
+    // Post-render: inject copy buttons on terminals
+    injectCopyButtons();
   }
 
   // ── Welcome Screen ──
@@ -208,54 +211,95 @@ const App = (() => {
     const dasarCount = MODULES.filter(m => m.section === 'Dasar').length;
     const menengahCount = MODULES.filter(m => m.section === 'Menengah').length;
     const lanjutanCount = MODULES.filter(m => m.section === 'Lanjutan').length;
+    const totalModules = getEducationalModules().length;
+    const completedCount = getEducationalModules().filter(m => isCompleted(m.id)).length;
 
     container.innerHTML = `
       <div class="content-fade">
         <div class="welcome-hero">
-          <span class="welcome-rocket">🚀</span>
+          <div class="welcome-badge">
+            <span class="welcome-badge-dot"></span>
+            ${totalModules} modul terstruktur
+          </div>
           <h1 class="welcome-title">
-            Belajar GitHub dari<br>
-            <span class="gradient-text">Nol Sampai Mahir</span>
+            Belajar GitHub<br>
+            <span class="gradient-text">dari Nol Sampai Mahir</span>
           </h1>
           <p class="welcome-subtitle">
             Panduan lengkap berbahasa Indonesia dengan analogi sederhana
-            dan contoh kontekstual. Dari pemula sampai mahir, semua dalam 12 modul terstruktur.
+            dan contoh kontekstual. Tanpa prerequisite, tanpa bahasa Inggris rumit.
           </p>
-          <button class="welcome-cta" onclick="App.navigateTo('${firstDasar?.id || 'apa-itu-git'}')">
-            Mulai Belajar
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
+          <div class="welcome-actions">
+            <button class="welcome-cta" onclick="App.navigateTo('${firstDasar?.id || 'apa-itu-git'}')">
+              Mulai Belajar
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </button>
+            ${completedCount > 0 ? `
+              <button class="welcome-cta-secondary" onclick="App.navigateTo('${state.currentModule}')">
+                Lanjutkan (${completedCount}/${totalModules})
+              </button>
+            ` : ''}
+          </div>
         </div>
 
         <div class="feature-cards">
           <div class="feature-card" onclick="App.navigateTo('${firstDasar?.id || 'apa-itu-git'}')">
-            <div class="feature-card-icon">📦</div>
-            <div class="feature-card-title">Dasar</div>
-            <div class="feature-card-desc">
-              Pahami konsep Git & GitHub, instalasi, repository, dan alur kerja dasar add-commit-push.
+            <div class="feature-card-header">
+              <span class="feature-card-badge pemula">Dasar</span>
+              <span class="feature-card-count">${dasarCount} modul</span>
             </div>
-            <div class="feature-card-meta">${dasarCount} modul</div>
+            <div class="feature-card-title">Fondasi Git & GitHub</div>
+            <div class="feature-card-desc">
+              Konsep version control, instalasi, repository, dan alur kerja add-commit-push dengan analogi sehari-hari.
+            </div>
+            <div class="feature-card-topics">
+              <span>Git vs GitHub</span>
+              <span>Install</span>
+              <span>Repo</span>
+              <span>Commit</span>
+            </div>
           </div>
 
           <div class="feature-card" onclick="App.navigateTo('${firstMenengah?.id || 'branching'}')">
-            <div class="feature-card-icon">🔀</div>
-            <div class="feature-card-title">Menengah</div>
-            <div class="feature-card-desc">
-              Branching, pull request, fork, dan cara menangani merge conflict.
+            <div class="feature-card-header">
+              <span class="feature-card-badge menengah">Menengah</span>
+              <span class="feature-card-count">${menengahCount} modul</span>
             </div>
-            <div class="feature-card-meta">${menengahCount} modul</div>
+            <div class="feature-card-title">Kolaborasi Tim</div>
+            <div class="feature-card-desc">
+              Branching, pull request, fork, dan cara menangani merge conflict tanpa panik.
+            </div>
+            <div class="feature-card-topics">
+              <span>Branch</span>
+              <span>PR</span>
+              <span>Fork</span>
+              <span>Conflict</span>
+            </div>
           </div>
 
           <div class="feature-card wide" onclick="App.navigateTo('${firstLanjutan?.id || 'fitur-github'}')">
-            <div class="feature-card-icon">🚀</div>
-            <div class="feature-card-title">Lanjutan</div>
-            <div class="feature-card-desc">
-              Fitur GitHub (Actions, Pages, Issues), perintah advanced, dan Git workflow profesional.
+            <div class="feature-card-header">
+              <span class="feature-card-badge lanjutan">Lanjutan</span>
+              <span class="feature-card-count">${lanjutanCount} modul</span>
             </div>
-            <div class="feature-card-meta">${lanjutanCount} modul</div>
+            <div class="feature-card-body">
+              <div>
+                <div class="feature-card-title">Workflow Profesional</div>
+                <div class="feature-card-desc">
+                  GitHub Actions, Pages, Issues, perintah advanced (stash, rebase, reset), dan Git Flow untuk tim production.
+                </div>
+              </div>
+              <div class="feature-card-topics">
+                <span>Actions</span>
+                <span>Stash</span>
+                <span>Rebase</span>
+                <span>Git Flow</span>
+                <span>Pages</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -463,6 +507,41 @@ const App = (() => {
         btn.innerHTML = original;
         btn.classList.remove('copied');
       }, 2000);
+    });
+  }
+
+  function copyTerminal(btn) {
+    const body = btn.closest('.terminal')?.querySelector('.terminal-body');
+    if (!body) return;
+
+    // Extract only the command lines (skip prompt $ and output)
+    const lines = body.querySelectorAll('.command');
+    const text = Array.from(lines).map(el => el.textContent).join('\n')
+      || body.textContent.trim();
+
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      const original = btn.innerHTML;
+      btn.innerHTML = `Copied!`;
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  function injectCopyButtons() {
+    // Terminal copy buttons
+    document.querySelectorAll('.terminal').forEach(term => {
+      if (term.querySelector('.terminal-copy-btn')) return; // already has one
+      const header = term.querySelector('.terminal-header');
+      if (!header) return;
+      const btn = document.createElement('button');
+      btn.className = 'terminal-copy-btn';
+      btn.setAttribute('aria-label', 'Copy commands');
+      btn.innerHTML = `Copy`;
+      btn.onclick = () => copyTerminal(btn);
+      header.appendChild(btn);
     });
   }
 
