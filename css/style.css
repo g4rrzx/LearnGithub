@@ -142,9 +142,6 @@ body {
 
 /* ── 5. LAYOUT GRID ── */
 .app {
-  display: grid;
-  grid-template-columns: var(--sidebar-w) 1fr;
-  grid-template-rows: 1fr;
   min-height: 100vh;
   min-height: 100dvh;
 }
@@ -154,6 +151,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
+  margin-left: var(--sidebar-w);
   overflow-x: hidden;
 }
 
@@ -1347,8 +1345,8 @@ button { cursor: pointer; }
 
 /* ── 23. RESPONSIVE: MOBILE (<=768px) ── */
 @media (max-width: 768px) {
-  .app {
-    grid-template-columns: 1fr;
+  .main-wrapper {
+    margin-left: 0;
   }
 
   /* Sidebar becomes drawer */
