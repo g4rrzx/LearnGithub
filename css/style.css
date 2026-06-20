@@ -1095,6 +1095,41 @@ body {
   flex-shrink: 0;
 }
 
+/* Concept Visual (SVG illustrations) */
+.concept-visual {
+  margin: 28px 0;
+  padding: 20px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.concept-svg {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Branching Visual */
+.branch-visual {
+  margin: 28px 0;
+  padding: 24px 20px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.branch-visual-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  fill: var(--text-tertiary);
+}
+
 /* ── 16. TABLE ── */
 .article-body table {
   width: 100%;

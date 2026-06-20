@@ -41,6 +41,55 @@ const MODULES = [
       <h2>Git vs GitHub - Apa Bedanya?</h2>
       <p>Banyak pemula yang bingung antara Git dan GitHub. Meskipun sering disebut bersamaan, keduanya adalah hal yang berbeda:</p>
 
+      <div class="concept-visual">
+        <svg viewBox="0 0 800 260" fill="none" xmlns="http://www.w3.org/2000/svg" class="concept-svg">
+          <!-- Left: Local Computer (Git) -->
+          <rect x="40" y="30" width="300" height="200" rx="16" fill="var(--bg-tertiary)" stroke="var(--border)" stroke-width="1.5"/>
+          <rect x="60" y="50" width="260" height="120" rx="8" fill="var(--bg-primary)" stroke="var(--border)" stroke-width="1"/>
+          <!-- Screen content: code lines -->
+          <rect x="80" y="70" width="120" height="6" rx="3" fill="var(--green)" opacity="0.6"/>
+          <rect x="80" y="86" width="180" height="6" rx="3" fill="var(--text-tertiary)" opacity="0.4"/>
+          <rect x="80" y="102" width="140" height="6" rx="3" fill="var(--accent)" opacity="0.5"/>
+          <rect x="80" y="118" width="200" height="6" rx="3" fill="var(--text-tertiary)" opacity="0.4"/>
+          <rect x="80" y="134" width="100" height="6" rx="3" fill="var(--orange)" opacity="0.5"/>
+          <!-- Keyboard -->
+          <rect x="100" y="185" width="180" height="30" rx="6" fill="var(--bg-elevated)" stroke="var(--border)" stroke-width="1"/>
+          <rect x="115" y="193" width="20" height="14" rx="2" fill="var(--bg-tertiary)"/>
+          <rect x="140" y="193" width="20" height="14" rx="2" fill="var(--bg-tertiary)"/>
+          <rect x="165" y="193" width="20" height="14" rx="2" fill="var(--bg-tertiary)"/>
+          <rect x="190" y="193" width="60" height="14" rx="2" fill="var(--bg-tertiary)"/>
+          <!-- Label -->
+          <text x="190" y="252" text-anchor="middle" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="13" font-weight="600">GIT (Lokal)</text>
+
+          <!-- Center: Arrows -->
+          <line x1="360" y1="100" x2="430" y2="100" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+          <polygon points="428,94 440,100 428,106" fill="var(--accent)" opacity="0.6"/>
+          <line x1="440" y1="140" x2="370" y2="140" stroke="var(--green)" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+          <polygon points="372,134 360,140 372,146" fill="var(--green)" opacity="0.6"/>
+          <text x="400" y="88" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="10">push</text>
+          <text x="400" y="160" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="10">pull/clone</text>
+
+          <!-- Right: Cloud (GitHub) -->
+          <rect x="460" y="30" width="300" height="200" rx="16" fill="var(--bg-tertiary)" stroke="var(--accent-border)" stroke-width="1.5"/>
+          <!-- Cloud icon -->
+          <path d="M560 90 C560 70 580 55 600 55 C620 55 635 65 640 75 C650 68 665 70 672 80 C682 80 690 90 690 100 C690 112 680 120 668 120 L565 120 C552 120 542 110 542 100 C542 90 550 82 560 90Z" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+          <!-- Repo icons -->
+          <rect x="500" y="140" width="100" height="30" rx="6" fill="var(--bg-primary)" stroke="var(--border)" stroke-width="1"/>
+          <circle cx="516" cy="155" r="5" fill="var(--green)" opacity="0.6"/>
+          <rect x="526" y="151" width="60" height="6" rx="3" fill="var(--text-tertiary)" opacity="0.5"/>
+          <rect x="500" y="178" width="100" height="30" rx="6" fill="var(--bg-primary)" stroke="var(--border)" stroke-width="1"/>
+          <circle cx="516" cy="193" r="5" fill="var(--accent)" opacity="0.6"/>
+          <rect x="526" y="189" width="50" height="6" rx="3" fill="var(--text-tertiary)" opacity="0.5"/>
+          <!-- People icons -->
+          <circle cx="660" cy="155" r="12" fill="var(--purple)" opacity="0.2" stroke="var(--purple)" stroke-width="1"/>
+          <circle cx="690" cy="155" r="12" fill="var(--orange)" opacity="0.2" stroke="var(--orange)" stroke-width="1"/>
+          <circle cx="720" cy="155" r="12" fill="var(--green)" opacity="0.2" stroke="var(--green)" stroke-width="1"/>
+          <text x="690" y="192" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="10">kolaborasi</text>
+          <!-- Label -->
+          <text x="610" y="252" text-anchor="middle" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="13" font-weight="600">GITHUB (Cloud)</text>
+        </svg>
+      </div>
+
       <table>
         <thead>
           <tr>
@@ -245,6 +294,46 @@ const MODULES = [
 
       <h2>Langkah 4: Setup SSH Key</h2>
       <p>SSH Key memungkinkan kamu push ke GitHub tanpa memasukkan password setiap kali:</p>
+
+      <div class="concept-visual">
+        <svg viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="concept-svg">
+          <!-- Left: You (User) -->
+          <circle cx="100" cy="80" r="28" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+          <circle cx="100" cy="70" r="10" fill="var(--accent)" opacity="0.4"/>
+          <path d="M80 95 Q100 110 120 95" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <text x="100" y="130" text-anchor="middle" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="12">Kamu</text>
+
+          <!-- Center: SSH Key (card) -->
+          <rect x="240" y="45" width="160" height="90" rx="12" fill="var(--bg-tertiary)" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="260" y="60" width="40" height="28" rx="4" fill="var(--orange)" opacity="0.2"/>
+          <rect x="264" y="64" width="32" height="20" rx="2" fill="var(--orange)" opacity="0.3"/>
+          <rect x="310" y="65" width="70" height="6" rx="3" fill="var(--text-tertiary)" opacity="0.4"/>
+          <rect x="310" y="78" width="50" height="6" rx="3" fill="var(--text-tertiary)" opacity="0.3"/>
+          <rect x="260" y="100" width="120" height="6" rx="3" fill="var(--text-tertiary)" opacity="0.2"/>
+          <rect x="260" y="112" width="80" height="6" rx="3" fill="var(--text-tertiary)" opacity="0.2"/>
+          <text x="320" y="160" text-anchor="middle" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="11">SSH Key = Kartu Akses</text>
+
+          <!-- Arrows -->
+          <line x1="140" y1="80" x2="230" y2="80" stroke="var(--accent)" stroke-width="1.5" opacity="0.4"/>
+          <polygon points="228,75 238,80 228,85" fill="var(--accent)" opacity="0.4"/>
+          <line x1="410" y1="80" x2="500" y2="80" stroke="var(--green)" stroke-width="1.5" opacity="0.4"/>
+          <polygon points="498,75 508,80 498,85" fill="var(--green)" opacity="0.4"/>
+          <text x="185" y="70" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">tap</text>
+          <text x="455" y="70" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">verified</text>
+
+          <!-- Right: GitHub (door/building) -->
+          <rect x="520" y="35" width="180" height="130" rx="14" fill="var(--bg-tertiary)" stroke="var(--green)" stroke-width="1.5"/>
+          <rect x="540" y="55" width="140" height="70" rx="8" fill="var(--bg-primary)" stroke="var(--border)" stroke-width="1"/>
+          <!-- Door with checkmark -->
+          <rect x="590" y="65" width="40" height="50" rx="4" fill="var(--green)" opacity="0.1" stroke="var(--green)" stroke-width="1"/>
+          <path d="M600 90 L608 98 L622 82" stroke="var(--green)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Repos inside -->
+          <rect x="545" y="60" width="35" height="12" rx="3" fill="var(--accent)" opacity="0.2"/>
+          <rect x="545" y="78" width="35" height="12" rx="3" fill="var(--purple)" opacity="0.2"/>
+          <rect x="545" y="96" width="35" height="12" rx="3" fill="var(--orange)" opacity="0.2"/>
+          <text x="610" y="185" text-anchor="middle" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="12">GitHub</text>
+        </svg>
+      </div>
 
       <div class="terminal">
         <div class="terminal-header">
