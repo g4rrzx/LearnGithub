@@ -468,8 +468,90 @@ const MODULES = [
         <div class="callout-analogy-title">Analogi: Timeline Avengers Endgame</div>
         <p>Branch itu seperti alternate timeline di Avengers: Endgame. Kamu bisa membuat timeline alternatif untuk bereksperimen tanpa mempengaruhi timeline utama (main). Kalau eksperimen berhasil, timeline digabungkan kembali (merge).</p>
       </div>
-      <h2>Konten modul ini sedang dalam pengembangan...</h2>
-      <p>Modul ini akan membahas <code>git branch</code>, <code>git checkout</code>, <code>git checkout -b</code>, <code>git merge</code>, dan konvensi penamaan branch.</p>
+
+      <div class="branch-visual">
+        <svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg" class="concept-svg">
+          <!-- Main branch (horizontal) -->
+          <line x1="60" y1="80" x2="740" y2="80" stroke="var(--accent)" stroke-width="3" opacity="0.6"/>
+          <text x="40" y="65" fill="var(--accent)" font-family="var(--font-mono)" font-size="12" font-weight="600">main</text>
+
+          <!-- Commits on main -->
+          <circle cx="120" cy="80" r="8" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="220" cy="80" r="8" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="520" cy="80" r="8" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="680" cy="80" r="8" fill="var(--accent)" opacity="0.8"/>
+
+          <!-- Feature branch (splits from commit 2) -->
+          <path d="M220 80 Q260 80 280 160" stroke="var(--green)" stroke-width="2.5" fill="none" opacity="0.7"/>
+          <line x1="280" y1="160" x2="480" y2="160" stroke="var(--green)" stroke-width="2.5" opacity="0.7"/>
+          <path d="M480 160 Q500 160 520 80" stroke="var(--green)" stroke-width="2.5" fill="none" opacity="0.7"/>
+          <text x="255" y="200" fill="var(--green)" font-family="var(--font-mono)" font-size="11" font-weight="500">feature/login</text>
+
+          <!-- Commits on feature branch -->
+          <circle cx="320" cy="160" r="7" fill="var(--green)" opacity="0.8"/>
+          <circle cx="400" cy="160" r="7" fill="var(--green)" opacity="0.8"/>
+
+          <!-- Merge point -->
+          <circle cx="520" cy="80" r="10" fill="var(--bg-primary)" stroke="var(--green)" stroke-width="2.5"/>
+          <text x="530" y="55" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">merge</text>
+
+          <!-- Branch point label -->
+          <text x="200" y="55" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">branch</text>
+          <line x1="220" y1="58" x2="220" y2="72" stroke="var(--text-tertiary)" stroke-width="1" stroke-dasharray="3 2"/>
+
+          <!-- Hotfix branch (short, from main) -->
+          <path d="M620 80 Q640 80 650 220" stroke="var(--orange)" stroke-width="2" fill="none" opacity="0.6"/>
+          <line x1="650" y1="220" x2="700" y2="220" stroke="var(--orange)" stroke-width="2" opacity="0.6"/>
+          <path d="M700 220 Q710 220 720 80" stroke="var(--orange)" stroke-width="2" fill="none" stroke-dasharray="4 3" opacity="0.4"/>
+          <text x="645" y="252" fill="var(--orange)" font-family="var(--font-mono)" font-size="11" font-weight="500">hotfix/bug</text>
+          <circle cx="675" cy="220" r="6" fill="var(--orange)" opacity="0.8"/>
+
+          <!-- Legend -->
+          <circle cx="80" cy="252" r="5" fill="var(--accent)" opacity="0.6"/>
+          <text x="92" y="256" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">= commit</text>
+        </svg>
+      </div>
+
+      <h2>Perintah Branch Dasar</h2>
+      <p>Branch memungkinkan kamu bekerja di fitur terpisah tanpa mengganggu kode utama:</p>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <div class="terminal-dot red"></div>
+            <div class="terminal-dot yellow"></div>
+            <div class="terminal-dot green"></div>
+          </div>
+          <span class="terminal-title">Terminal - Branching</span>
+        </div>
+        <div class="terminal-body">
+<span class="highlight"># Lihat semua branch</span>
+<span class="prompt">$</span> <span class="command">git branch</span>
+<span class="success">* main</span>
+
+<span class="highlight"># Buat branch baru</span>
+<span class="prompt">$</span> <span class="command">git branch feature/login</span>
+
+<span class="highlight"># Pindah ke branch baru</span>
+<span class="prompt">$</span> <span class="command">git checkout feature/login</span>
+<span class="output">Switched to branch 'feature/login'</span>
+
+<span class="highlight"># Atau buat + pindah sekaligus (shortcut)</span>
+<span class="prompt">$</span> <span class="command">git checkout -b feature/login</span>
+<span class="output">Switched to a new branch 'feature/login'</span>
+
+<span class="highlight"># Setelah selesai, merge ke main</span>
+<span class="prompt">$</span> <span class="command">git checkout main</span>
+<span class="prompt">$</span> <span class="command">git merge feature/login</span>
+<span class="success">Updating a1b2c3d..e4f5g6h</span>
+<span class="success">Fast-forward</span>
+        </div>
+      </div>
+
+      <div class="callout-tip">
+        <div class="callout-title">Konvensi Penamaan Branch</div>
+        <p>Gunakan format <code>tipe/nama-fitur</code> agar rapi: <code>feature/login</code>, <code>bugfix/header-mobile</code>, <code>hotfix/security-patch</code>, <code>refactor/api-calls</code>.</p>
+      </div>
     `,
     quiz: {
       question: 'Perintah paling efisien untuk membuat DAN langsung pindah ke branch baru adalah?',
@@ -497,7 +579,89 @@ const MODULES = [
         <div class="callout-analogy-title">Analogi: Mengajukan Proposal ke Bos</div>
         <p>Pull Request itu seperti mengajukan proposal perubahan ke bos. Kamu tidak bisa langsung mengubah tata letak kantor, kamu perlu mengajukan proposal dulu. Bos (maintainer) akan review, mungkin minta revisi, lalu approve atau reject.</p>
       </div>
-      <h2>Konten modul ini sedang dalam pengembangan...</h2>
+
+      <div class="concept-visual">
+        <svg viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg" class="concept-svg">
+          <!-- Step 1: Feature branch -->
+          <rect x="30" y="30" width="160" height="80" rx="12" fill="var(--bg-tertiary)" stroke="var(--green)" stroke-width="1.5"/>
+          <text x="110" y="62" text-anchor="middle" fill="var(--green)" font-family="var(--font-mono)" font-size="11" font-weight="600">1. Code</text>
+          <text x="110" y="82" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">di feature branch</text>
+          <rect x="55" y="90" width="20" height="6" rx="3" fill="var(--green)" opacity="0.4"/>
+          <rect x="80" y="90" width="30" height="6" rx="3" fill="var(--green)" opacity="0.3"/>
+          <rect x="115" y="90" width="25" height="6" rx="3" fill="var(--green)" opacity="0.4"/>
+
+          <!-- Arrow 1→2 -->
+          <line x1="195" y1="70" x2="235" y2="70" stroke="var(--text-tertiary)" stroke-width="1.5"/>
+          <polygon points="233,65 243,70 233,75" fill="var(--text-tertiary)"/>
+
+          <!-- Step 2: Push -->
+          <rect x="248" y="30" width="130" height="80" rx="12" fill="var(--bg-tertiary)" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="313" y="62" text-anchor="middle" fill="var(--accent)" font-family="var(--font-mono)" font-size="11" font-weight="600">2. Push</text>
+          <text x="313" y="82" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">ke GitHub</text>
+          <path d="M290 92 L290 86 L305 95 L290 104 L290 98" fill="var(--accent)" opacity="0.3"/>
+
+          <!-- Arrow 2→3 -->
+          <line x1="383" y1="70" x2="423" y2="70" stroke="var(--text-tertiary)" stroke-width="1.5"/>
+          <polygon points="421,65 431,70 421,75" fill="var(--text-tertiary)"/>
+
+          <!-- Step 3: Create PR -->
+          <rect x="436" y="30" width="150" height="80" rx="12" fill="var(--bg-tertiary)" stroke="var(--purple)" stroke-width="1.5"/>
+          <text x="511" y="55" text-anchor="middle" fill="var(--purple)" font-family="var(--font-mono)" font-size="11" font-weight="600">3. Pull Request</text>
+          <text x="511" y="75" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">buat PR di GitHub</text>
+          <rect x="470" y="85" width="80" height="16" rx="4" fill="var(--purple)" opacity="0.15" stroke="var(--purple)" stroke-width="0.5"/>
+          <text x="510" y="96" text-anchor="middle" fill="var(--purple)" font-family="var(--font-mono)" font-size="8">Open PR</text>
+
+          <!-- Arrow 3→4 -->
+          <line x1="591" y1="70" x2="631" y2="70" stroke="var(--text-tertiary)" stroke-width="1.5"/>
+          <polygon points="629,65 639,70 629,75" fill="var(--text-tertiary)"/>
+
+          <!-- Step 4: Review & Merge -->
+          <rect x="644" y="30" width="130" height="80" rx="12" fill="var(--bg-tertiary)" stroke="var(--green)" stroke-width="2"/>
+          <text x="709" y="55" text-anchor="middle" fill="var(--green)" font-family="var(--font-mono)" font-size="11" font-weight="600">4. Merge</text>
+          <text x="709" y="75" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">setelah approved</text>
+          <path d="M695 88 L703 96 L722 80" stroke="var(--green)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Review feedback loop -->
+          <path d="M560 115 Q560 175 460 175 Q360 175 360 115" stroke="var(--orange)" stroke-width="1.5" fill="none" stroke-dasharray="5 3" opacity="0.5"/>
+          <polygon points="358,118 360,108 366,116" fill="var(--orange)" opacity="0.5"/>
+          <text x="460" y="195" text-anchor="middle" fill="var(--orange)" font-family="var(--font-mono)" font-size="9" opacity="0.7">kalau ada revisi</text>
+
+          <!-- Bottom: main branch result -->
+          <line x1="100" y1="220" x2="700" y2="220" stroke="var(--accent)" stroke-width="2" opacity="0.3"/>
+          <text x="60" y="224" fill="var(--accent)" font-family="var(--font-mono)" font-size="10" opacity="0.5">main</text>
+          <circle cx="700" cy="220" r="6" fill="var(--green)" opacity="0.5"/>
+          <text x="720" y="224" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">merged</text>
+        </svg>
+      </div>
+
+      <h2>Apa itu Pull Request?</h2>
+      <p>Pull Request (PR) adalah cara mengajukan perubahan kode untuk direview oleh tim sebelum digabungkan ke branch utama. Di GitHub, kamu membuat PR setelah push branch ke remote.</p>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <div class="terminal-dot red"></div>
+            <div class="terminal-dot yellow"></div>
+            <div class="terminal-dot green"></div>
+          </div>
+          <span class="terminal-title">Terminal - Membuat PR</span>
+        </div>
+        <div class="terminal-body">
+<span class="highlight"># 1. Pastikan kamu di feature branch dan sudah push</span>
+<span class="prompt">$</span> <span class="command">git push origin feature/login</span>
+<span class="output">remote: Create a pull request for 'feature/login' on GitHub</span>
+<span class="output">remote:   https://github.com/user/repo/pull/new/feature/login</span>
+
+<span class="highlight"># 2. Buka link di atas, atau pakai GitHub CLI:</span>
+<span class="prompt">$</span> <span class="command">gh pr create --title "Add login feature" --body "Implemented login form with validation"</span>
+<span class="success">https://github.com/user/repo/pull/42</span>
+        </div>
+      </div>
+
+      <div class="callout-tip">
+        <div class="callout-title">Tips PR yang Baik</div>
+        <p>Tulis deskripsi PR yang jelas: apa yang kamu ubah, kenapa, dan bagaimana cara test-nya. Screenshot kalau ada perubahan UI. Reviewer akan lebih mudah approve PR yang well-documented.</p>
+      </div>
     `,
     quiz: {
       question: 'Apa tujuan utama Pull Request?',
@@ -553,7 +717,85 @@ const MODULES = [
         <div class="callout-analogy-title">Analogi: Dua Orang Edit Slide PowerPoint yang Sama</div>
         <p>Merge conflict terjadi ketika dua orang mengubah bagian yang sama dari file yang sama. Git tidak tahu versi mana yang benar, jadi dia meminta kamu untuk memilih.</p>
       </div>
-      <h2>Konten modul ini sedang dalam pengembangan...</h2>
+
+      <div class="concept-visual">
+        <svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="concept-svg">
+          <!-- Two branches converging to conflict -->
+          <!-- Branch A (top) -->
+          <line x1="60" y1="60" x2="350" y2="60" stroke="var(--green)" stroke-width="2.5" opacity="0.6"/>
+          <text x="40" y="45" fill="var(--green)" font-family="var(--font-mono)" font-size="10" font-weight="500">branch-a</text>
+          <circle cx="120" cy="60" r="6" fill="var(--green)" opacity="0.7"/>
+          <circle cx="220" cy="60" r="6" fill="var(--green)" opacity="0.7"/>
+
+          <!-- Branch B (bottom) -->
+          <line x1="60" y1="140" x2="350" y2="140" stroke="var(--purple)" stroke-width="2.5" opacity="0.6"/>
+          <text x="40" y="125" fill="var(--purple)" font-family="var(--font-mono)" font-size="10" font-weight="500">branch-b</text>
+          <circle cx="120" cy="140" r="6" fill="var(--purple)" opacity="0.7"/>
+          <circle cx="220" cy="140" r="6" fill="var(--purple)" opacity="0.7"/>
+
+          <!-- Arrows converging -->
+          <path d="M350 60 Q400 60 430 100" stroke="var(--green)" stroke-width="2" fill="none" opacity="0.5"/>
+          <path d="M350 140 Q400 140 430 100" stroke="var(--purple)" stroke-width="2" fill="none" opacity="0.5"/>
+
+          <!-- CONFLICT point -->
+          <circle cx="440" cy="100" r="16" fill="var(--red)" opacity="0.15" stroke="var(--red)" stroke-width="2"/>
+          <text x="440" y="104" text-anchor="middle" fill="var(--red)" font-family="var(--font-mono)" font-size="11" font-weight="700">!</text>
+          <text x="440" y="130" text-anchor="middle" fill="var(--red)" font-family="var(--font-mono)" font-size="10" font-weight="600">CONFLICT</text>
+
+          <!-- Arrow to resolution -->
+          <line x1="462" y1="100" x2="520" y2="100" stroke="var(--text-tertiary)" stroke-width="1.5"/>
+          <polygon points="518,95 528,100 518,105" fill="var(--text-tertiary)"/>
+
+          <!-- Resolution -->
+          <rect x="535" y="55" width="230" height="90" rx="12" fill="var(--bg-tertiary)" stroke="var(--green)" stroke-width="1.5"/>
+          <text x="650" y="78" text-anchor="middle" fill="var(--green)" font-family="var(--font-mono)" font-size="11" font-weight="600">Resolve</text>
+          <text x="650" y="96" text-anchor="middle" fill="var(--text-tertiary)" font-family="var(--font-mono)" font-size="9">pilih/edit kode yang benar</text>
+          <rect x="560" y="108" width="80" height="18" rx="4" fill="var(--green)" opacity="0.1" stroke="var(--green)" stroke-width="0.5"/>
+          <text x="600" y="120" text-anchor="middle" fill="var(--green)" font-family="var(--font-mono)" font-size="9">git add + commit</text>
+
+          <!-- Conflict markers example -->
+          <rect x="100" y="185" width="600" height="100" rx="10" fill="var(--bg-primary)" stroke="var(--border)" stroke-width="1"/>
+          <text x="120" y="208" fill="var(--red)" font-family="var(--font-mono)" font-size="11">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</text>
+          <text x="120" y="226" fill="var(--green)" font-family="var(--font-mono)" font-size="11">const title = "Versi Branch A";</text>
+          <text x="120" y="244" fill="var(--orange)" font-family="var(--font-mono)" font-size="11">=======</text>
+          <text x="120" y="262" fill="var(--purple)" font-family="var(--font-mono)" font-size="11">const title = "Versi Branch B";</text>
+          <text x="120" y="280" fill="var(--red)" font-family="var(--font-mono)" font-size="11">&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-b</text>
+        </svg>
+      </div>
+
+      <h2>Kapan Merge Conflict Terjadi?</h2>
+      <p>Merge conflict terjadi ketika dua branch mengubah <strong>baris yang sama</strong> di <strong>file yang sama</strong>. Git tidak bisa otomatis memilih versi mana yang benar.</p>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <div class="terminal-dot red"></div>
+            <div class="terminal-dot yellow"></div>
+            <div class="terminal-dot green"></div>
+          </div>
+          <span class="terminal-title">Terminal - Merge Conflict</span>
+        </div>
+        <div class="terminal-body">
+<span class="prompt">$</span> <span class="command">git merge branch-b</span>
+<span class="error">Auto-merging app.js</span>
+<span class="error">CONFLICT (content): Merge conflict in app.js</span>
+<span class="error">Automatic merge failed; fix conflicts and commit the result.</span>
+
+<span class="highlight"># 1. Buka file, cari conflict markers (<<<<<<< ======= >>>>>>>)</span>
+<span class="highlight"># 2. Pilih versi yang benar atau gabungkan keduanya</span>
+<span class="highlight"># 3. Hapus semua conflict markers</span>
+
+<span class="highlight"># 4. Tandai sudah resolved</span>
+<span class="prompt">$</span> <span class="command">git add app.js</span>
+<span class="prompt">$</span> <span class="command">git commit -m "Resolve merge conflict in app.js"</span>
+<span class="success">Merge made by the 'ort' strategy.</span>
+        </div>
+      </div>
+
+      <div class="callout-warning">
+        <div class="callout-title">Jangan Panik!</div>
+        <p>Kalau salah resolve, kamu selalu bisa batalkan dengan <code>git merge --abort</code> (sebelum commit) atau <code>git reset --hard HEAD</code> untuk kembali ke state sebelum merge.</p>
+      </div>
     `,
     quiz: {
       question: 'Langkah pertama saat menghadapi merge conflict adalah?',
